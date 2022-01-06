@@ -28,19 +28,22 @@ import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui'
 
 // const network = 'process.env.REACT_APP_SOLANA_NETWORK' as WalletAdapterNetwork
 
-const candyMachineId = null
-const network = null
-const rpcHost = null
+const candyMachineId = new anchor.web3.PublicKey(
+  'rkLnHYzbKmATN7WCCJ2xCiLJnYo7TzwAjYnd5xz7A9P',
+)
+const network = 'devnet' as WalletAdapterNetwork
+const rpcHost = 'https://api.devnet.solana.com'
 
 // const rpcHost = 'process.env.REACT_APP_SOLANA_RPC_HOST'!
-// const connection = new anchor.web3.Connection(rpcHost)
+const connection = new anchor.web3.Connection(rpcHost)
 
-// const startDateSeed = parseInt('process.env.REACT_APP_CANDY_START_DATE'!, 10)
+const date = String(new Date())
+const startDateSeed = parseInt(date, 10)
 
 const txTimeout = 30000 // milliseconds (confirm this works for your project)
 
 const App = () => {
-  const endpoint = null
+  const endpoint = useMemo(() => clusterApiUrl(network), [])
 
   const wallets = useMemo(
     () => [
@@ -55,19 +58,19 @@ const App = () => {
   return (
     <main>
       <Main>
-        {/* <ConnectionProvider endpoint={endpoint}>
-              <WalletProvider wallets={wallets} autoConnect>
-                <WalletDialogProvider>
-                  <Minter
-                      candyMachineId={candyMachineId}
-                      connection={connection}
-                      startDate={startDateSeed}
-                      txTimeout={txTimeout}
-                      rpcHost={rpcHost}
-                    />
-                </WalletDialogProvider>
-              </WalletProvider>
-            </ConnectionProvider> */}
+        <ConnectionProvider endpoint={endpoint}>
+          <WalletProvider wallets={wallets} autoConnect>
+            <WalletDialogProvider>
+              <Minter
+                candyMachineId={candyMachineId}
+                connection={connection}
+                startDate={startDateSeed}
+                txTimeout={txTimeout}
+                rpcHost={rpcHost}
+              />
+            </WalletDialogProvider>
+          </WalletProvider>
+        </ConnectionProvider>
       </Main>
     </main>
   )

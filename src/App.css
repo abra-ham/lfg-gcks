@@ -314,7 +314,7 @@ header {
 }
 
 .minting-box {
-  background-color: var(--minting-box-color) !important;
+  background-color: white !important;
   color: var(--minting-box-text-color) !important;
 }
 
