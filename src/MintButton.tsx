@@ -11,16 +11,28 @@ import {
   mintPanic,
 } from './userSettings'
 import { toDate } from './utils'
+import FadeBorder from './geckomponents/fade-border.png'
 
 export const CTAButton = styled(Button)`
   width: 100%;
-  height: 60px;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  color: white;
+  height: 80px;
+  margin: 2rem 0;
+  font-color: white;
   font-size: 16px;
   font-weight: bold;
+  background-color: transparent !important;
+  background-image: url(${FadeBorder});
+  background-positon: center;
+  background-repeat: norepeat;
+  cursor: pointer;
 ` // add your styles here
+
+const ButtonText = styled.p`
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Poppins-Bold';
+`
 
 export const MintButton = ({
   onMint,
@@ -93,7 +105,6 @@ export const MintButton = ({
   }, [gatewayStatus, clicked, setClicked, onMint])
   return (
     <CTAButton
-      className="minting-button"
       disabled={
         candyMachine?.state.isSoldOut ||
         isMinting ||
@@ -119,7 +130,7 @@ export const MintButton = ({
       }}
       variant="contained"
     >
-      <div className="mint-button-text">
+      <ButtonText>
         {candyMachine?.state.isSoldOut ? (
           'SOLD OUT!!!'
         ) : isMinting ? (
@@ -129,7 +140,7 @@ export const MintButton = ({
         ) : (
           'MINT'
         )}
-      </div>
+      </ButtonText>
     </CTAButton>
   )
 }

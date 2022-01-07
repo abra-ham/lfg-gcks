@@ -32,28 +32,38 @@ import {
   MintWhitelistCustomHTML,
   MintPublicSaleCustomHTML,
 } from './userSettings'
+import FadeBorder from './geckomponents/fade-border.png'
 
 const ConnectButton = styled(WalletDialogButton)`
-  position: absolute;
-  left: 0px;
-  bottom: -15px;
-  width: 100%;
+  margin: 1rem auto !important;
+  width: 200px;
   height: 60px;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  background: linear-gradient(180deg, #604ae5 0%, #813eee 100%);
+  background-image: url(${FadeBorder});
   color: white;
   font-size: 16px;
   font-weight: bold;
-  transform: translate(0%, -50%);
 `
 
 const MintContainer = styled.div`
-  position: absolute;
-  width: 100%;
-  left: 0px;
-  bottom: 15px;
+  width: 300px;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
 ` // add your styles here
+
+const Text = styled.span`
+  font-family: 'Poppins-Regular';
+  color: black;
+  font-size: 1.5rem;
+`
+
+const BoldText = styled.span`
+  font-family: 'Poppins-Bold';
+  color: black;
+  font-size: 5rem;
+  text-align: center;
+  text-transform: uppercase;
+`
 
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey
@@ -247,114 +257,136 @@ const Home = (props: HomeProps) => {
   const phase = getPhase(candyMachine)
   console.log({ phase })
 
+  const getSaleText = () => {
+    if (!price) {
+      return 'Fetching...'
+    }
+
+    if (price == 0.5) {
+      return 'Public sale'
+    }
+
+    return 'Presale for OGs, thank you!'
+  }
+
+  const getMintedText = () => {
+    //mintingTotal + ' out of ' + itemsAvailable
+    if (!price || !mintingTotal || !itemsAvailable) return null
+
+    if (price == 0.3) {
+      return `${100 - mintingTotal} out of 100 available`
+    }
+
+    return `${itemsAvailable - mintingTotal} out of ${itemsAvailable} available`
+  }
+
   return (
     <Container>
-      <Container maxWidth="xs" style={{ position: 'relative' }}>
-        <Grid container justifyContent="space-between" direction="column">
-          <div>
-            {phase === Phase.Welcome && welcomeSettings.enableCustomHTML && (
-              <MintWelcomeCustomHTML />
-            )}
-            {phase === Phase.WhiteListMint &&
-              whitelistSettings.enableCustomHTML && <MintWhitelistCustomHTML />}
-            {phase === Phase.PublicMint &&
-              publicSaleSettings.enableCustomHTML && (
-                <MintPublicSaleCustomHTML />
-              )}
+      <Container maxWidth="md">
+        <div>
+          {phase === Phase.Welcome && welcomeSettings.enableCustomHTML && (
+            <MintWelcomeCustomHTML />
+          )}
+          {phase === Phase.WhiteListMint &&
+            whitelistSettings.enableCustomHTML && <MintWhitelistCustomHTML />}
+          {phase === Phase.PublicMint &&
+            publicSaleSettings.enableCustomHTML && <MintPublicSaleCustomHTML />}
 
-            {(phase === Phase.PublicMint || Phase.WhiteListMint) && (
-              <>
-                {phase === Phase.WhiteListMint && (
-                  <div className=" text-center">
-                    {whiteListTokenBalance >= 0 ? (
-                      <h1>{whiteListTokenBalance}</h1>
-                    ) : (
-                      <div className="loading"></div>
-                    )}
+          {(phase === Phase.PublicMint || Phase.WhiteListMint) && (
+            <>
+              {phase === Phase.WhiteListMint && (
+                <div className=" text-center">
+                  {whiteListTokenBalance >= 0 ? (
+                    <h1>{whiteListTokenBalance}</h1>
+                  ) : (
+                    <div className="loading"></div>
+                  )}
 
-                    <div>
-                      <p>Mints to Claim</p>
-                    </div>
+                  <div>
+                    <p>Mints to Claim</p>
                   </div>
-                )}
-                <Grid
-                  container
-                  justifyContent="space-between"
-                  color="textSecondary"
-                >
-                  <div className="test-stat">
-                    {(phase === Phase.WhiteListMint ||
-                      phase === Phase.PublicMint) &&
-                      (itemsAvailable !== null && mintingTotal !== null ? (
-                        <p>{mintingTotal + ' / ' + itemsAvailable}</p>
+                </div>
+              )}
+              <BoldText>{getSaleText()}</BoldText>
+              <Grid
+                container
+                justifyContent="space-between"
+                color="textSecondary"
+              >
+                <div className="test-stat">
+                  {(phase === Phase.WhiteListMint ||
+                    phase === Phase.PublicMint) &&
+                    (itemsAvailable !== null && mintingTotal !== null ? (
+                      <Text>{getMintedText()}</Text>
+                    ) : (
+                      <p className="loading"></p>
+                    ))}
+                </div>
+
+                <div className="text-end">
+                  {(phase === Phase.Welcome && welcomeSettings.showPrice) ||
+                  phase === Phase.WhiteListMint ||
+                  phase === Phase.PublicMint ? (
+                    <>
+                      {price ? (
+                        <Text>Price: {price} Sol</Text>
                       ) : (
                         <p className="loading"></p>
-                      ))}
-                  </div>
+                      )}
+                    </>
+                  ) : (
+                    ''
+                  )}
 
-                  <div className="text-end">
-                    {(phase === Phase.Welcome && welcomeSettings.showPrice) ||
-                    phase === Phase.WhiteListMint ||
-                    phase === Phase.PublicMint ? (
-                      <>
-                        {price ? (
-                          <p>{price} Sol</p>
-                        ) : (
-                          <p className="loading"></p>
-                        )}
-                      </>
-                    ) : (
-                      ''
-                    )}
+                  {/* {formatSol(yourSOLBalance || 0).toLocaleString()} SOL */}
+                </div>
+              </Grid>
 
-                    {/* {formatSol(yourSOLBalance || 0).toLocaleString()} SOL */}
-                  </div>
-                </Grid>
-
-                {!wallet.connected ? (
+              {!wallet.connected ? (
+                <MintContainer>
                   <ConnectButton>Connect{''}</ConnectButton>
-                ) : (
-                  <MintContainer>
-                    {candyMachine?.state.isActive &&
-                    candyMachine?.state.gatekeeper &&
-                    wallet.publicKey &&
-                    wallet.signTransaction ? (
-                      <GatewayProvider
-                        wallet={{
-                          publicKey:
-                            wallet.publicKey ||
-                            new PublicKey(CANDY_MACHINE_PROGRAM),
-                          //@ts-ignore
-                          signTransaction: wallet.signTransaction,
-                        }}
-                        // // Replace with following when added
-                        // gatekeeperNetwork={candyMachine.state.gatekeeper_network}
-                        gatekeeperNetwork={
-                          candyMachine?.state?.gatekeeper?.gatekeeperNetwork
-                        } // This is the ignite (captcha) network
-                        /// Don't need this for mainnet
-                        clusterUrl={rpcUrl}
-                        options={{ autoShowModal: false }}
-                      >
-                        <MintButton
-                          candyMachine={candyMachine}
-                          isMinting={isMinting}
-                          onMint={onMint}
-                        />
-                      </GatewayProvider>
-                    ) : (
+                </MintContainer>
+              ) : (
+                <MintContainer>
+                  {candyMachine?.state.isActive &&
+                  candyMachine?.state.gatekeeper &&
+                  wallet.publicKey &&
+                  wallet.signTransaction ? (
+                    <GatewayProvider
+                      wallet={{
+                        publicKey:
+                          wallet.publicKey ||
+                          new PublicKey(CANDY_MACHINE_PROGRAM),
+                        //@ts-ignore
+                        signTransaction: wallet.signTransaction,
+                      }}
+                      // // Replace with following when added
+                      // gatekeeperNetwork={candyMachine.state.gatekeeper_network}
+                      gatekeeperNetwork={
+                        candyMachine?.state?.gatekeeper?.gatekeeperNetwork
+                      } // This is the ignite (captcha) network
+                      /// Don't need this for mainnet
+                      clusterUrl={rpcUrl}
+                      options={{ autoShowModal: false }}
+                    >
                       <MintButton
                         candyMachine={candyMachine}
                         isMinting={isMinting}
                         onMint={onMint}
                       />
-                    )}
-                  </MintContainer>
-                )}
-              </>
-            )}
-          </div>
-        </Grid>
+                    </GatewayProvider>
+                  ) : (
+                    <MintButton
+                      candyMachine={candyMachine}
+                      isMinting={isMinting}
+                      onMint={onMint}
+                    />
+                  )}
+                </MintContainer>
+              )}
+            </>
+          )}
+        </div>
       </Container>
 
       <Snackbar
