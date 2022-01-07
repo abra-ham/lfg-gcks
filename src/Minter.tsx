@@ -21,7 +21,7 @@ import {
 
 import { AlertState } from './utils'
 import { MintButton } from './MintButton'
-import { getPhase, Phase, PhaseHeader } from './PhaseHeader'
+import { getPhase, Phase } from './PhaseHeader'
 import { GatewayProvider } from '@civic/solana-gateway-react'
 import {
   whitelistSettings,
