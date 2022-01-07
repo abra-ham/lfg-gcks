@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { Container, Snackbar } from '@material-ui/core'
-import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import Alert from '@material-ui/lab/Alert'
 
