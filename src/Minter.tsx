@@ -66,7 +66,6 @@ const BoldText = styled.span`
 
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey
-
   connection: anchor.web3.Connection
   startDate: number
   txTimeout: number
@@ -261,7 +260,7 @@ const Home = (props: HomeProps) => {
       return 'Fetching...'
     }
 
-    if (price == 0.5) {
+    if (price === 0.5) {
       return 'Public sale'
     }
 
@@ -272,7 +271,7 @@ const Home = (props: HomeProps) => {
     //mintingTotal + ' out of ' + itemsAvailable
     if (!price || !mintingTotal || !itemsAvailable) return null
 
-    if (price == 0.3) {
+    if (price === 0.3) {
       return `${100 - mintingTotal} out of 100 available`
     }
 

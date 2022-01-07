@@ -40,9 +40,8 @@ export const MintButton = ({
 
   isMinting,
 }: {
-  onMint: () => Promise<void>
+  onMint: () => void
   candyMachine: CandyMachineAccount | undefined
-
   isMinting: boolean
 }) => {
   const { requestGatewayToken, gatewayStatus } = useGateway()

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { Footer } from './Footer'
 
@@ -16,62 +16,6 @@ const device = {
   xs: `(max-width: ${size.xs})`,
   sm: `(max-width: ${size.sm})`,
   lg: `(max-width: ${size.lg})`,
-}
-
-const NavLink = styled.a`
-  font-size: 2rem;
-  font-family: 'Poppins-Bold';
-  color: white;
-  text-transform: uppercase;
-
-  @media screen and ${device.sm} {
-    font-size: 1.8rem;
-    margin: 0 1rem;
-  }
-`
-
-const NavWrapper = styled.nav`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  cursor: pointer;
-
-  @media screen and ${device.sm} {
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0;
-  }
-`
-
-const NavSeparator = styled.div`
-  width: 5px;
-  height: 30px;
-  background-image: url('/fade-border.png');
-  background-size: contain;
-  margin: 0 2rem;
-
-  @media screen and ${device.sm} {
-    display: none;
-  }
-
-  @media screen and ${device.xs} {
-    display: none;
-  }
-`
-
-const Nav = () => {
-  return (
-    <NavWrapper>
-      <NavLink data-atropos-offset="16">Litepaper</NavLink>
-      <NavSeparator />
-
-      <NavSeparator />
-
-      <NavSeparator />
-      <NavLink data-atropos-offset="16">Team</NavLink>
-    </NavWrapper>
-  )
 }
 
 const BannerWrapper = styled.section`
@@ -162,46 +106,6 @@ const BoldBigText = styled.p`
   }
 `
 
-const RegularBigText = styled.p`
-  font-size: 2rem;
-  text-align: justify;
-  font-family: 'Poppins-Regular';
-  text-transform: uppercase;
-  margin: 5px auto 20px;
-  max-width: 80%;
-  color: #42413e;
-
-  @media screen and ${device.sm} {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-  }
-
-  @media screen and ${device.xs} {
-    margin-top: 2rem;
-    font-size: 1.5rem;
-    max-width: 90%;
-  }
-`
-
-const BannerTop = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-
-  @media screen and ${device.lg} {
-    width: 100%;
-    justify-content: center;
-    margin-top: 2rem;
-    margin-bottom: 4rem;
-  }
-
-  @media screen and ${device.xs} {
-    flex-direction: column-reverse;
-  }
-`
-
 const BannerBottom = styled.div`
   max-height: 10%;
   width: 90%;
@@ -263,7 +167,7 @@ const Banner = () => {
   )
 }
 
-export default ({ children }) => {
+const Component = ({ children }) => {
   return (
     <React.Fragment>
       <Main>
@@ -274,3 +178,6 @@ export default ({ children }) => {
     </React.Fragment>
   )
 }
+
+
+export default Component
