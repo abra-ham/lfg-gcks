@@ -31,7 +31,7 @@ import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui'
 const candyMachineId = new anchor.web3.PublicKey(
   'DzADPfws5rK2kPof4k9uUbMC6rdM8BQ4hdVJ4ALSJRPX',
 )
-const network = 'devnet' as WalletAdapterNetwork;
+const network = 'mainnet-beta' as WalletAdapterNetwork
 const rpcHost =
   'https://little-silent-pond.solana-mainnet.quiknode.pro/c749d78a26b4ca76d109cc821c4d6a16f8cd1315/'
 

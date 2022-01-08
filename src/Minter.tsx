@@ -253,14 +253,13 @@ const Home = (props: HomeProps) => {
   }, [candyMachine, publicKey, props.connection])
 
   const phase = getPhase(candyMachine)
-  console.log({ phase })
 
   const getSaleText = () => {
     if (!price) {
-      return 'Fetching...'
+      return 'Connect wallet below'
     }
 
-    if (price === 0.5) {
+    if (price === 0.79) {
       return 'Public sale'
     }
 
@@ -269,11 +268,10 @@ const Home = (props: HomeProps) => {
 
   const getMintedText = () => {
     //mintingTotal + ' out of ' + itemsAvailable
-    console.log({ price, mintingTotal, itemsAvailable });
     if (!price || mintingTotal === null || !itemsAvailable) return null
 
-    if (price === 0.3) {
-      return `${100 - mintingTotal} out of 100 available`
+    if (price === 0.35) {
+      return `${150 - mintingTotal} out of 150 available for presale`
     }
 
     return `${itemsAvailable - mintingTotal} out of ${itemsAvailable} available`
