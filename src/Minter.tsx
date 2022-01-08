@@ -231,7 +231,7 @@ const Home = (props: HomeProps) => {
           )
         } catch {
           setWhiteListTokenBalance(0)
-        }
+        }whw
       }
     }
 
@@ -263,7 +263,7 @@ const Home = (props: HomeProps) => {
       return 'Public sale'
     }
 
-    return 'Presale for OGs, thank you!'
+    return 'Public sale, now with reduced supply!'
   }
 
   const getMintedText = () => {
@@ -274,7 +274,7 @@ const Home = (props: HomeProps) => {
       return `${150 - mintingTotal} out of 150 available for presale`
     }
 
-    return `${itemsAvailable - mintingTotal} out of ${itemsAvailable} available`
+    return `${444 - mintingTotal} out of 444 available`
   }
 
   return (
