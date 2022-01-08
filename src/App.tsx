@@ -34,7 +34,7 @@ const candyMachineId = new anchor.web3.PublicKey(
 const network = 'devnet' as WalletAdapterNetwork;
 const rpcHost = process.env.REACT_APP_NODE!
 
-console.log({ rpcHost });
+console.log('rpcHost', { rpcHost });
 
 // const rpcHost = 'process.env.REACT_APP_SOLANA_RPC_HOST'!
 const connection = new anchor.web3.Connection(rpcHost)
