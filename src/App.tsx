@@ -32,9 +32,8 @@ const candyMachineId = new anchor.web3.PublicKey(
   'DzADPfws5rK2kPof4k9uUbMC6rdM8BQ4hdVJ4ALSJRPX',
 )
 const network = 'devnet' as WalletAdapterNetwork;
-const rpcHost = process.env.REACT_APP_NODE!
-
-console.log('rpcHost', { rpcHost });
+const rpcHost =
+  'https://little-silent-pond.solana-mainnet.quiknode.pro/c749d78a26b4ca76d109cc821c4d6a16f8cd1315/'
 
 // const rpcHost = 'process.env.REACT_APP_SOLANA_RPC_HOST'!
 const connection = new anchor.web3.Connection(rpcHost)
