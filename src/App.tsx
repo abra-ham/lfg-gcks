@@ -29,7 +29,7 @@ import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui'
 // const network = 'process.env.REACT_APP_SOLANA_NETWORK' as WalletAdapterNetwork
 
 const candyMachineId = new anchor.web3.PublicKey(
-  'DzADPfws5rK2kPof4k9uUbMC6rdM8BQ4hdVJ4ALSJRPX',
+  '49hZPREKufqptbxs3ELFezmUr1yRmPdeinB8M9nVvUxN',
 )
 const network = 'mainnet-beta' as WalletAdapterNetwork
 const rpcHost =
