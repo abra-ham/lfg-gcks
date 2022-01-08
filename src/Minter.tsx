@@ -269,7 +269,8 @@ const Home = (props: HomeProps) => {
 
   const getMintedText = () => {
     //mintingTotal + ' out of ' + itemsAvailable
-    if (!price || !mintingTotal || !itemsAvailable) return null
+    console.log({ price, mintingTotal, itemsAvailable });
+    if (!price || mintingTotal === null || !itemsAvailable) return null
 
     if (price === 0.3) {
       return `${100 - mintingTotal} out of 100 available`
