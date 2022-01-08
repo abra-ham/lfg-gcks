@@ -231,7 +231,7 @@ const Home = (props: HomeProps) => {
           )
         } catch {
           setWhiteListTokenBalance(0)
-        }whw
+        }
       }
     }
 
