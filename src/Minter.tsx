@@ -266,6 +266,8 @@ const Home = (props: HomeProps) => {
     return 'Public sale, now with reduced supply!'
   }
 
+  //
+
   const getMintedText = () => {
     //mintingTotal + ' out of ' + itemsAvailable
     if (!price || mintingTotal === null || !itemsAvailable) return null
@@ -274,7 +276,7 @@ const Home = (props: HomeProps) => {
       return `${150 - mintingTotal} out of 150 available for presale`
     }
 
-    return `${444 - mintingTotal} out of 444 available`
+    return `${212 - mintingTotal} out of 444 available`
   }
 
   return (
