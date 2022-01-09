@@ -1,77 +1,37 @@
 import './App.css'
-import { useMemo } from 'react'
+import styled from 'styled-components'
 
 import Main from './geckomponents/Main'
 
-import Minter from './Minter'
 
-import * as anchor from '@project-serum/anchor'
-import { clusterApiUrl } from '@solana/web3.js'
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
-import {
-  getPhantomWallet,
-  getSolflareWallet,
-  getSolletWallet,
-  getMathWallet,
-} from '@solana/wallet-adapter-wallets'
+const Container = styled.section`
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`
 
-import {
-  ConnectionProvider,
-  WalletProvider,
-} from '@solana/wallet-adapter-react'
-
-import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui'
-
-// const candyMachineId = 'process.env.REACT_APP_CANDY_MACHINE_ID'
-//   ? new anchor.web3.PublicKey('process.env.REACT_APP_CANDY_MACHINE_ID')
-//   : undefined
-
-// const network = 'process.env.REACT_APP_SOLANA_NETWORK' as WalletAdapterNetwork
-
-const candyMachineId = new anchor.web3.PublicKey(
-  '49hZPREKufqptbxs3ELFezmUr1yRmPdeinB8M9nVvUxN',
-)
-const network = 'mainnet-beta' as WalletAdapterNetwork
-const rpcHost =
-  'https://little-silent-pond.solana-mainnet.quiknode.pro/c749d78a26b4ca76d109cc821c4d6a16f8cd1315/'
-
-// const rpcHost = 'process.env.REACT_APP_SOLANA_RPC_HOST'!
-const connection = new anchor.web3.Connection(rpcHost)
-
-const date = String(new Date())
-const startDateSeed = parseInt(date, 10)
-
-const txTimeout = 30000 // milliseconds (confirm this works for your project)
+const BoldText = styled.span`
+  font-family: 'Poppins-Bold';
+  color: black;
+  font-size: 5rem;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 2rem;
+`
 
 const App = () => {
-  const endpoint = useMemo(() => clusterApiUrl(network), [])
-
-  const wallets = useMemo(
-    () => [
-      getPhantomWallet(),
-      getSolflareWallet(),
-      getSolletWallet(),
-      getMathWallet(),
-    ],
-    [],
-  )
-
   return (
     <main>
       <Main>
-        <ConnectionProvider endpoint={endpoint}>
-          <WalletProvider wallets={wallets} autoConnect>
-            <WalletDialogProvider>
-              <Minter
-                candyMachineId={candyMachineId}
-                connection={connection}
-                startDate={startDateSeed}
-                txTimeout={txTimeout}
-                rpcHost={rpcHost}
-              />
-            </WalletDialogProvider>
-          </WalletProvider>
-        </ConnectionProvider>
+        <Container>
+          <BoldText>
+            We are sold out! Thank you all for your support. Now we moon. Tag us at @GeckosNFT via Twitter.
+          </BoldText>
+          <BoldText>Geek geek, FAM.</BoldText>
+        </Container>
       </Main>
     </main>
   )
